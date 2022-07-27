@@ -11,7 +11,7 @@ namespace Meetup_API.Domain
                 Id = 0,
                 Name = "My birthDay",
                 Description = "Celebrate my 20 y.o.",
-                Plan = "Cook some dish & sleep before the start",
+                Plan = "Buy some fashion clothes & sleep before the start",
                 Organizer = "Gleb Sukristik",
                 Speaker = "Gleb Sukristik & his friends",
                 Date = "15.04.2023",
