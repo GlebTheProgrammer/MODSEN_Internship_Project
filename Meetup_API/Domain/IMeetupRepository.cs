@@ -6,5 +6,7 @@ namespace Meetup_API.Domain
     {
         IEnumerable<Event> GetEvents();
         Event GetEventById(int id);
+        void CreateEvent(Event eventItem);
+        bool SaveChanges();
     }
 }
