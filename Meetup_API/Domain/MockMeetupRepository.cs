@@ -4,9 +4,9 @@ namespace Meetup_API.Domain
 {
     public class MockMeetupRepository : IMeetupRepository
     {
-        public Event GetEventById(int id)
+        List<Event> events = new List<Event>()
         {
-            return new Event
+            new Event
             {
                 Id = 0,
                 Name = "My birthDay",
@@ -16,16 +16,10 @@ namespace Meetup_API.Domain
                 Speaker = "Gleb Sukristik & his friends",
                 Date = "15.04.2023",
                 Place = "Pizza Tempo"
-            };
-        }
-
-        public IEnumerable<Event> GetEvents()
-        {
-            var events = new List<Event>()
+            },
+            new Event()
             {
-                new Event()
-                {
-                    Id = 0,
+                    Id = 1,
                     Name = "OpenIT Conference",
                     Description = "Conference for IT specialists",
                     Plan = "Come and have some fun",
@@ -33,21 +27,38 @@ namespace Meetup_API.Domain
                     Speaker = "Different people from different countries & positions",
                     Date = "01.09.2023",
                     Place = "Victoria Hottel"
-                },
-                new Event()
-                {
-                    Id = 1,
-                    Name = "University studies",
-                    Description = "NOOOOO PLEASE",
-                    Plan = "Study, study, study...",
-                    Organizer = "BSUIR",
-                    Speaker = "Lecturers",
-                    Date = "01.09.2023",
-                    Place = "BSUIR University"
-                }
-            };
+            },
+            new Event()
+            {
+                Id = 2,
+                Name = "University studies",
+                Description = "NOOOOO PLEASE",
+                Plan = "Study, study, study...",
+                Organizer = "BSUIR",
+                Speaker = "Lecturers",
+                Date = "01.09.2023",
+                Place = "BSUIR University"
+            }
+        };
+        public void CreateEvent(Event eventItem)
+        {
+            events.Add(eventItem);
+            return;
+        }
 
+        public Event GetEventById(int id)
+        {
+            return events.FirstOrDefault(eventItem => eventItem.Id == id);
+        }
+
+        public IEnumerable<Event> GetEvents()
+        {
             return events;
+        }
+
+        public bool SaveChanges()
+        {
+            return true;
         }
     }
 }
