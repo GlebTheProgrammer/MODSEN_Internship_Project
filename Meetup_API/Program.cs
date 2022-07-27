@@ -16,6 +16,8 @@ builder.Services.AddScoped<IMeetupRepository, SqlMeetupRepository>();
 builder.Services.AddDbContext<MeetupDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("MeetupConnection")));
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
