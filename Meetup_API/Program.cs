@@ -1,4 +1,6 @@
 using Meetup_API.Domain;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IMeetupRepository, MockMeetupRepository>();
+
+builder.Services.AddDbContext<MeetupDbContext>(options => options.UseSqlServer
+(builder.Configuration.GetConnectionString("MeetupConnection")));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
