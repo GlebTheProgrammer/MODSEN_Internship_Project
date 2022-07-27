@@ -10,12 +10,12 @@ namespace Meetup_API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly IMeetupRepository mockMeetupRepository;
+        private readonly IMeetupRepository meetupRepository;
         private readonly IMapper mapper;
 
         public EventsController(IMeetupRepository meetupRepository, IMapper mapper)
         {
-            mockMeetupRepository = meetupRepository;
+            this.meetupRepository = meetupRepository;
             this.mapper = mapper;
         }
 
@@ -23,7 +23,7 @@ namespace Meetup_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<EventReadDto>> GetAllEvents()
         {
-            var eventItems = mockMeetupRepository.GetEvents();
+            var eventItems = meetupRepository.GetEvents();
 
             return Ok(mapper.Map<IEnumerable<EventReadDto>>(eventItems));
         }
@@ -32,12 +32,22 @@ namespace Meetup_API.Controllers
         [HttpGet("{id}")]
         public ActionResult<EventReadDto> GetEventById(int id)
         {
-            var eventItem = mockMeetupRepository.GetEventById(id);
+            var eventItem = meetupRepository.GetEventById(id);
 
             if(eventItem != null)
                 return Ok(mapper.Map<EventReadDto>(eventItem));
 
             return NotFound();
+        }
+
+        //POST api/events/{id}
+        [HttpPost]
+        public ActionResult<EventReadDto> CreateEvent(EventCreateDto eventCreateDto)
+        {
+            var eventModel = mapper.Map<Event>(eventCreateDto);
+            meetupRepository.CreateEvent(eventModel);
+
+            return Ok(eventModel);
         }
     }
 }

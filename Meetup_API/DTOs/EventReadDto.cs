@@ -10,7 +10,6 @@ namespace Meetup_API.DTOs
 
         public string Plan { get; set; }
 
-
         public string Speaker { get; set; }
 
         public string Date { get; set; }
