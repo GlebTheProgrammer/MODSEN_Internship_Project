@@ -8,7 +8,12 @@ namespace Meetup_API.Controllers
     [ApiController]
     public class EventsController : ControllerBase
     {
-        private readonly MockMeetupRepository mockMeetupRepository = new MockMeetupRepository();
+        private readonly IMeetupRepository mockMeetupRepository;
+
+        public EventsController(IMeetupRepository meetupRepository)
+        {
+            mockMeetupRepository = meetupRepository;
+        }
 
         //GET api/events
         [HttpGet]
