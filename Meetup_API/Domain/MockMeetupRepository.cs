@@ -8,6 +8,7 @@ namespace Meetup_API.Domain
         {
             return new Event
             {
+                Id = 0,
                 Name = "My birthDay",
                 Description = "Celebrate my 20 y.o.",
                 Plan = "Cook some dish & sleep before the start",
@@ -24,6 +25,7 @@ namespace Meetup_API.Domain
             {
                 new Event()
                 {
+                    Id = 0,
                     Name = "OpenIT Conference",
                     Description = "Conference for IT specialists",
                     Plan = "Come and have some fun",
@@ -34,6 +36,7 @@ namespace Meetup_API.Domain
                 },
                 new Event()
                 {
+                    Id = 1,
                     Name = "University studies",
                     Description = "NOOOOO PLEASE",
                     Plan = "Study, study, study...",
