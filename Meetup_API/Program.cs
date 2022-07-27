@@ -8,7 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddScoped<IMeetupRepository, MockMeetupRepository>();
+//Uncomment to use mock repository
+//builder.Services.AddScoped<IMeetupRepository, MockMeetupRepository>();
+//Uncomment to use DB repository
+builder.Services.AddScoped<IMeetupRepository, SqlMeetupRepository>();
 
 builder.Services.AddDbContext<MeetupDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("MeetupConnection")));
