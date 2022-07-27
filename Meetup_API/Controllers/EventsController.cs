@@ -1,4 +1,6 @@
-﻿using Meetup_API.Domain;
+﻿using AutoMapper;
+using Meetup_API.Domain;
+using Meetup_API.DTOs;
 using Meetup_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,28 +11,33 @@ namespace Meetup_API.Controllers
     public class EventsController : ControllerBase
     {
         private readonly IMeetupRepository mockMeetupRepository;
+        private readonly IMapper mapper;
 
-        public EventsController(IMeetupRepository meetupRepository)
+        public EventsController(IMeetupRepository meetupRepository, IMapper mapper)
         {
             mockMeetupRepository = meetupRepository;
+            this.mapper = mapper;
         }
 
         //GET api/events
         [HttpGet]
-        public ActionResult<IEnumerable<Event>> GetAllEvents()
+        public ActionResult<IEnumerable<EventReadDto>> GetAllEvents()
         {
-            var eventItem = mockMeetupRepository.GetEvents();
+            var eventItems = mockMeetupRepository.GetEvents();
 
-            return Ok(eventItem);
+            return Ok(mapper.Map<IEnumerable<EventReadDto>>(eventItems));
         }
 
         //GET api/events/{id}
         [HttpGet("{id}")]
-        public ActionResult<Event> GetEventById(int id)
+        public ActionResult<EventReadDto> GetEventById(int id)
         {
-            var eventItems = mockMeetupRepository.GetEventById(id);
+            var eventItem = mockMeetupRepository.GetEventById(id);
 
-            return Ok(eventItems);
+            if(eventItem != null)
+                return Ok(mapper.Map<EventReadDto>(eventItem));
+
+            return NotFound();
         }
     }
 }
