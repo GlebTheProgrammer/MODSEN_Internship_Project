@@ -29,7 +29,7 @@ namespace Meetup_API.Controllers
         }
 
         //GET api/events/{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEventById")]
         public ActionResult<EventReadDto> GetEventById(int id)
         {
             var eventItem = meetupRepository.GetEventById(id);
@@ -45,9 +45,13 @@ namespace Meetup_API.Controllers
         public ActionResult<EventReadDto> CreateEvent(EventCreateDto eventCreateDto)
         {
             var eventModel = mapper.Map<Event>(eventCreateDto);
-            meetupRepository.CreateEvent(eventModel);
 
-            return Ok(eventModel);
+            meetupRepository.CreateEvent(eventModel);
+            meetupRepository.SaveChanges();
+
+            var eventReadDto = mapper.Map<EventReadDto>(eventModel);
+
+            return CreatedAtRoute(nameof(GetEventById), new { Id = eventModel.Id }, eventReadDto);
         }
     }
 }

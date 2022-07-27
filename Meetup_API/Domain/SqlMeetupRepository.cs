@@ -17,7 +17,6 @@ namespace Meetup_API.Domain
                 throw new ArgumentNullException(nameof(eventItem));
 
             context.Events.Add(eventItem);
-            SaveChanges();
             return;
         }
 
