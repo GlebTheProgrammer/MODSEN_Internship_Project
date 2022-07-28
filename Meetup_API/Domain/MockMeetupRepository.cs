@@ -60,5 +60,10 @@ namespace Meetup_API.Domain
         {
             return true;
         }
+
+        public void UpdateEvent(Event eventItem)
+        {
+            //Nothing
+        }
     }
 }

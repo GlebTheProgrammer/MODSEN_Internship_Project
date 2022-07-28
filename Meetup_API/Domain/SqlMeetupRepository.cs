@@ -34,5 +34,10 @@ namespace Meetup_API.Domain
         {
             return context.SaveChanges() >= 0;
         }
+
+        public void UpdateEvent(Event eventItem)
+        {
+            //Nothing
+        }
     }
 }
