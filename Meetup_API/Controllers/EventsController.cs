@@ -84,7 +84,15 @@ namespace Meetup_API.Controllers
 
             var eventToPatch = mapper.Map<EventUpdateDto>(eventModelFromRepo);
 
-            patchDocument.ApplyTo(eventToPatch, ModelState);
+            try
+            {
+                patchDocument.ApplyTo(eventToPatch, ModelState);
+            }
+            catch(ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
 
             if (!TryValidateModel(eventToPatch))
                 return ValidationProblem(ModelState);

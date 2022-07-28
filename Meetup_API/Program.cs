@@ -12,9 +12,9 @@ builder.Services.AddControllers().AddNewtonsoftJson(s => {
 });
 
 //Uncomment to use mock repository
-//builder.Services.AddScoped<IMeetupRepository, MockMeetupRepository>();
+builder.Services.AddSingleton<IMeetupRepository, MockMeetupRepository>();
 //Uncomment to use DB repository
-builder.Services.AddScoped<IMeetupRepository, SqlMeetupRepository>();
+//builder.Services.AddScoped<IMeetupRepository, SqlMeetupRepository>();
 
 builder.Services.AddDbContext<MeetupDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("MeetupConnection")));

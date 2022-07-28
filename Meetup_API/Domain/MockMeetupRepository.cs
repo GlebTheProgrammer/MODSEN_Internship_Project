@@ -43,6 +43,11 @@ namespace Meetup_API.Domain
 
         public void CreateEvent(Event eventItem)
         {
+            if (eventItem == null)
+                throw new ArgumentNullException(nameof(eventItem));
+
+            eventItem.Id = events.Last().Id + 1;
+
             events.Add(eventItem);
             return;
         }
