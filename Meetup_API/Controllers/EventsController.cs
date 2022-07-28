@@ -95,5 +95,20 @@ namespace Meetup_API.Controllers
 
             return NoContent();
         }
+
+        //DELETE api/events/{id}
+        [HttpDelete("{id}")]
+        public ActionResult DeleteEvent(int id)
+        {
+            var eventModelFromRepo = meetupRepository.GetEventById(id);
+
+            if (eventModelFromRepo == null)
+                return NotFound();
+
+            meetupRepository.DeleteEvent(eventModelFromRepo);
+            meetupRepository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
