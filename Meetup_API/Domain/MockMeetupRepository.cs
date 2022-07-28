@@ -40,9 +40,19 @@ namespace Meetup_API.Domain
                 Place = "BSUIR University"
             }
         };
+
         public void CreateEvent(Event eventItem)
         {
             events.Add(eventItem);
+            return;
+        }
+
+        public void DeleteEvent(Event eventItem)
+        {
+            if (eventItem == null)
+                throw new ArgumentNullException(nameof(eventItem));
+
+            events.Remove(eventItem);
             return;
         }
 

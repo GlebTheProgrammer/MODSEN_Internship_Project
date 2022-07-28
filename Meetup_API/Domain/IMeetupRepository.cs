@@ -9,5 +9,6 @@ namespace Meetup_API.Domain
         void CreateEvent(Event eventItem);
         bool SaveChanges();
         void UpdateEvent(Event eventItem);
+        void DeleteEvent(Event eventItem);
     }
 }

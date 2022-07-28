@@ -20,6 +20,16 @@ namespace Meetup_API.Domain
             return;
         }
 
+        public void DeleteEvent(Event eventItem)
+        {
+            if(eventItem == null)
+                throw new ArgumentNullException(nameof(eventItem));
+
+            context.Events.Remove(eventItem);
+
+            return;
+        }
+
         public Event GetEventById(int id)
         {
             return context.Events.FirstOrDefault(eventItem => eventItem.Id == id);
