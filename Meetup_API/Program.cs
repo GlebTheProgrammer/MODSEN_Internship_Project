@@ -1,12 +1,15 @@
 using Meetup_API.Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(s => {
+    s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+});
 
 //Uncomment to use mock repository
 //builder.Services.AddScoped<IMeetupRepository, MockMeetupRepository>();
