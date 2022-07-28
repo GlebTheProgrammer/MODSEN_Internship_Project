@@ -2,6 +2,7 @@
 using Meetup_API.Domain;
 using Meetup_API.DTOs;
 using Meetup_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +23,7 @@ namespace Meetup_API.Controllers
 
         //GET api/events
         [HttpGet]
+        [Authorize]
         public ActionResult<IEnumerable<EventReadDto>> GetAllEvents()
         {
             var eventItems = meetupRepository.GetEvents();
@@ -31,6 +33,7 @@ namespace Meetup_API.Controllers
 
         //GET api/events/{id}
         [HttpGet("{id}", Name = "GetEventById")]
+        [Authorize]
         public ActionResult<EventReadDto> GetEventById(int id)
         {
             var eventItem = meetupRepository.GetEventById(id);
@@ -43,6 +46,7 @@ namespace Meetup_API.Controllers
 
         //POST api/events/{id}
         [HttpPost]
+        [Authorize]
         public ActionResult<EventReadDto> CreateEvent(EventCreateDto eventCreateDto)
         {
             var eventModel = mapper.Map<Event>(eventCreateDto);
@@ -57,6 +61,7 @@ namespace Meetup_API.Controllers
 
         //PUT api/events/{id}
         [HttpPut("{id}")]
+        [Authorize]
         public ActionResult UpdateEvent(int id, EventUpdateDto eventUpdateDto)
         {
             var eventModelFromRepo = meetupRepository.GetEventById(id);
@@ -75,6 +80,7 @@ namespace Meetup_API.Controllers
 
         //PATCH api/events/{id}
         [HttpPatch("{id}")]
+        [Authorize]
         public ActionResult PartialEventUpdate(int id, JsonPatchDocument<EventUpdateDto> patchDocument)
         {
             var eventModelFromRepo = meetupRepository.GetEventById(id);
@@ -106,6 +112,7 @@ namespace Meetup_API.Controllers
 
         //DELETE api/events/{id}
         [HttpDelete("{id}")]
+        [Authorize]
         public ActionResult DeleteEvent(int id)
         {
             var eventModelFromRepo = meetupRepository.GetEventById(id);
