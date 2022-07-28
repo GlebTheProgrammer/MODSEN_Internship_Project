@@ -2,6 +2,7 @@
 using Meetup_API.Domain;
 using Meetup_API.DTOs;
 using Meetup_API.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Meetup_API.Controllers
@@ -66,6 +67,29 @@ namespace Meetup_API.Controllers
             //Update automatically
             mapper.Map(eventUpdateDto, eventModelFromRepo);
 
+            meetupRepository.UpdateEvent(eventModelFromRepo);
+            meetupRepository.SaveChanges();
+
+            return NoContent();
+        }
+
+        //PATCH api/events/{id}
+        [HttpPatch("{id}")]
+        public ActionResult PartialEventUpdate(int id, JsonPatchDocument<EventUpdateDto> patchDocument)
+        {
+            var eventModelFromRepo = meetupRepository.GetEventById(id);
+
+            if (eventModelFromRepo == null)
+                return NotFound();
+
+            var eventToPatch = mapper.Map<EventUpdateDto>(eventModelFromRepo);
+
+            patchDocument.ApplyTo(eventToPatch, ModelState);
+
+            if (!TryValidateModel(eventToPatch))
+                return ValidationProblem(ModelState);
+
+            mapper.Map(eventToPatch, eventModelFromRepo);
             meetupRepository.UpdateEvent(eventModelFromRepo);
             meetupRepository.SaveChanges();
 
