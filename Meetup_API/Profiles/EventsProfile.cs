@@ -15,6 +15,8 @@ namespace Meetup_API.Profiles
             CreateMap<EventCreateDto, Event>();
 
             CreateMap<EventUpdateDto, Event>();
+
+            CreateMap<Event, EventUpdateDto>();
         }
     }
 }
