@@ -53,5 +53,23 @@ namespace Meetup_API.Controllers
 
             return CreatedAtRoute(nameof(GetEventById), new { Id = eventModel.Id }, eventReadDto);
         }
+
+        //PUT api/events/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateEvent(int id, EventUpdateDto eventUpdateDto)
+        {
+            var eventModelFromRepo = meetupRepository.GetEventById(id);
+
+            if(eventModelFromRepo == null)
+                return NotFound();
+
+            //Update automatically
+            mapper.Map(eventUpdateDto, eventModelFromRepo);
+
+            meetupRepository.UpdateEvent(eventModelFromRepo);
+            meetupRepository.SaveChanges();
+
+            return NoContent();
+        }
     }
 }

@@ -9,8 +9,12 @@ namespace Meetup_API.Profiles
         public EventsProfile()
         {
             //Source -> Target
+
             CreateMap<Event, EventReadDto>();
+
             CreateMap<EventCreateDto, Event>();
+
+            CreateMap<EventUpdateDto, Event>();
         }
     }
 }
