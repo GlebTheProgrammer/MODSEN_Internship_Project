@@ -1,4 +1,4 @@
-# Постановка задача
+# Задание
 Разработать CRUD Web API для работы с мероприятиями (создание, изменение, удаление, получение), проект должен выполняться на .Net Core, с использованием EF Core.
 
 ### Функционал Web API
@@ -17,9 +17,9 @@
 ### Используемые в проекте технологии
 1. .Net 5.0+;
 2. Entity Framework Core;
-3. MS SQL / PostgreSQL or any other;
-4. AutoMapper / Mapster or any other;
-5. Authentication via bearer token (ex.: IdentityServer4);
+3. MS SQL DB;
+4. AutoMapper;
+5. Authentication via bearer token;
 6. Swagger.
 
 # Документация к проекту (Pуководство)
